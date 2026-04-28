@@ -11,5 +11,5 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
-add_executable(Arka main.cpp)
+add_executable(Arka src/main.cpp)
 target_link_libraries(Arka PRIVATE raylib)
