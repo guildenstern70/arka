@@ -1,3 +1,11 @@
+/*
+ * PROJECT ARKA
+ * (C) 2026 Alessio Saltarin
+
+ * This software is licensed under MIT license.
+ * See LICENSE.
+ */
+
 #include "raylib.h"
 
 int main()

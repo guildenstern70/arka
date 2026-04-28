@@ -4,7 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**Arka** is a C++20 Arkanoid clone built with CMake and [Raylib](https://www.raylib.com/) (fetched automatically via `FetchContent` at configure time — no manual install needed).
+**Arka** is a C++20 Arkanoid clone built with CMake and [Raylib](https://www.raylib.com/) (fetched automatically 
+via `FetchContent` at configure time — no manual install needed).
 
 ## Build
 
