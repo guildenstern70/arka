@@ -8,21 +8,101 @@
 
 #include "raylib.h"
 #include "ball.h"
+#include "paddle.h"
+
+enum class GameState {
+    INTRO,
+    PLAYING,
+    GAME_OVER
+};
 
 int main()
 {
     InitWindow(800, 600, "Arka");
     SetTargetFPS(60);
 
-    Ball ball(400.0f, 300.0f, 8.0f, 300.0f, -300.0f);
+    GameState state = GameState::INTRO;
+
+    Ball ball(400.0f, 300.0f, 8.0f, 300.0f, 300.0f);
+    Paddle paddle(350.0f, 550.0f, 100.0f, 15.0f, 500.0f, SKYBLUE);
 
     while (!WindowShouldClose())
     {
-        ball.Update(GetFrameTime());
+        float dt = GetFrameTime();
+
+        switch (state)
+        {
+            case GameState::INTRO:
+            {
+                if (IsKeyPressed(KEY_SPACE))
+                {
+                    ball.Reset(400.0f, 300.0f, 300.0f, 300.0f);
+                    paddle.Reset(350.0f, 550.0f);
+                    state = GameState::PLAYING;
+                }
+                break;
+            }
+            case GameState::PLAYING:
+            {
+                paddle.Update(dt);
+                ball.Update(dt);
+                ball.CheckCollisionWithPaddle(paddle.GetRect());
+
+                if (ball.IsLost())
+                {
+                    state = GameState::GAME_OVER;
+                }
+                break;
+            }
+            case GameState::GAME_OVER:
+            {
+                if (IsKeyPressed(KEY_SPACE))
+                {
+                    state = GameState::INTRO;
+                }
+                break;
+            }
+        }
 
         BeginDrawing();
         ClearBackground(BLACK);
-        ball.Draw();
+
+        switch (state)
+        {
+            case GameState::INTRO:
+            {
+                const char* titleText = "Arka";
+                int titleFontSize = 80;
+                int titleWidth = MeasureText(titleText, titleFontSize);
+                DrawText(titleText, (GetScreenWidth() - titleWidth) / 2, 200, titleFontSize, SKYBLUE);
+
+                const char* subtitleText = "Press SPACE to play";
+                int subtitleFontSize = 24;
+                int subtitleWidth = MeasureText(subtitleText, subtitleFontSize);
+                DrawText(subtitleText, (GetScreenWidth() - subtitleWidth) / 2, 350, subtitleFontSize, LIGHTGRAY);
+                break;
+            }
+            case GameState::PLAYING:
+            {
+                ball.Draw();
+                paddle.Draw();
+                break;
+            }
+            case GameState::GAME_OVER:
+            {
+                const char* overText = "Game Over";
+                int overFontSize = 60;
+                int overWidth = MeasureText(overText, overFontSize);
+                DrawText(overText, (GetScreenWidth() - overWidth) / 2, 220, overFontSize, RED);
+
+                const char* subText = "Press SPACE";
+                int subFontSize = 24;
+                int subWidth = MeasureText(subText, subFontSize);
+                DrawText(subText, (GetScreenWidth() - subWidth) / 2, 350, subFontSize, LIGHTGRAY);
+                break;
+            }
+        }
+
         EndDrawing();
     }
 
