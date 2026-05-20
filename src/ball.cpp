@@ -38,16 +38,16 @@ void Ball::CheckCollisionWithPaddle(const Rectangle& paddleRect) {
             position.y = paddleRect.y - radius;
             
             // Calculate hit factor relative to paddle center (-1.0 to 1.0)
-            float paddleCenter = paddleRect.x + paddleRect.width / 2.0f;
+            const float paddleCenter = paddleRect.x + paddleRect.width / 2.0f;
             float hitFactor = (position.x - paddleCenter) / (paddleRect.width / 2.0f);
 
             if (hitFactor < -1.0f) hitFactor = -1.0f;
             if (hitFactor > 1.0f) hitFactor = 1.0f;
 
             // Keep overall speed constant but redirect the ball
-            float speed = std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
-            float newX = speed * hitFactor * 0.8f;
-            float newYSq = speed * speed - newX * newX;
+            const float speed = std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
+            const float newX = speed * hitFactor * 0.8f;
+            const float newYSq = speed * speed - newX * newX;
             
             velocity.x = newX;
             if (newYSq > 0.0f) {
