@@ -71,14 +71,14 @@ int main()
         {
             case GameState::INTRO:
             {
-                const char* titleText = "Arka";
-                int titleFontSize = 80;
-                int titleWidth = MeasureText(titleText, titleFontSize);
+                const auto titleText = "Arka";
+                const int titleFontSize = 80;
+                const int titleWidth = MeasureText(titleText, titleFontSize);
                 DrawText(titleText, (GetScreenWidth() - titleWidth) / 2, 200, titleFontSize, SKYBLUE);
 
-                const char* subtitleText = "Press SPACE to play";
-                int subtitleFontSize = 24;
-                int subtitleWidth = MeasureText(subtitleText, subtitleFontSize);
+                const auto subtitleText = "Press SPACE to play";
+                constexpr int subtitleFontSize = 24;
+                const int subtitleWidth = MeasureText(subtitleText, subtitleFontSize);
                 DrawText(subtitleText, (GetScreenWidth() - subtitleWidth) / 2, 350, subtitleFontSize, LIGHTGRAY);
                 break;
             }
@@ -90,14 +90,14 @@ int main()
             }
             case GameState::GAME_OVER:
             {
-                const char* overText = "Game Over";
-                int overFontSize = 60;
-                int overWidth = MeasureText(overText, overFontSize);
+                const auto overText = "Game Over";
+                constexpr int overFontSize = 60;
+                const int overWidth = MeasureText(overText, overFontSize);
                 DrawText(overText, (GetScreenWidth() - overWidth) / 2, 220, overFontSize, RED);
 
-                const char* subText = "Press SPACE";
-                int subFontSize = 24;
-                int subWidth = MeasureText(subText, subFontSize);
+                const auto subText = "Press SPACE";
+                constexpr int subFontSize = 24;
+                const int subWidth = MeasureText(subText, subFontSize);
                 DrawText(subText, (GetScreenWidth() - subWidth) / 2, 350, subFontSize, LIGHTGRAY);
                 break;
             }

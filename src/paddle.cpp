@@ -8,10 +8,10 @@
 
 #include "paddle.h"
 
-Paddle::Paddle(float x, float y, float width, float height, float speed, Color color)
+Paddle::Paddle(const float x, const float y, const float width, const float height, const float speed, const Color color)
     : position{x, y}, width(width), height(height), speed(speed), color(color) {}
 
-void Paddle::Update(float dt) {
+void Paddle::Update(const float dt) {
     if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
         position.x -= speed * dt;
     }

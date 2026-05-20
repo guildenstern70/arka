@@ -8,7 +8,7 @@
 #include "ball.h"
 #include <cmath>
 
-Ball::Ball(float x, float y, float radius, float vx, float vy)
+Ball::Ball(const float x, const float y, const float radius, const float vx, const float vy)
     : position{x, y}, velocity{vx, vy}, radius(radius) {}
 
 void Ball::Update(const float dt) {
